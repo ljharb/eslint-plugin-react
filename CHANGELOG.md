@@ -5,10 +5,15 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 
 ## Unreleased
 
+### New
+* [`prefer-stateless-function`]: add fixer ([#1229][], [#1096][], @RiddleMan @golopot)
+
 ### Fixed
 * [`jsx-indent-props`]: Apply indentation when using brackets ([#2826][] @Moong0122)
 
 [#2826]: https://github.com/yannickcr/eslint-plugin-react/issues/2826
+[#1229]: https://github.com/yannickcr/eslint-plugin-react/pull/1229
+[#1096]: https://github.com/yannickcr/eslint-plugin-react/issues/1096
 
 ## [7.21.4] - 2020.10.09
 
