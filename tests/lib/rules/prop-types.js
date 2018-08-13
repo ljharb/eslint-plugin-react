@@ -3426,10 +3426,51 @@ ruleTester.run('prop-types', rule, {
         '      <div>{this.props.firstname} {this.props.lastname}</div>',
         '    );',
         '  }',
-        '}',
+        '};',
         'Test.propTypes = propTypes;'
       ].join('\n'),
       parser: parsers.BABEL_ESLINT,
+      errors: [
+        {message: '\'lastname\' is missing in props validation'}
+      ]
+    }, {
+      code: [
+        'class Test extends Foo.Component {',
+        '  render() {',
+        '    return (',
+        '      <div>{this.props.firstname} {this.props.lastname}</div>',
+        '    );',
+        '  }',
+        '};',
+        'const propTypes = forbidExtraProps({',
+        '  firstname: PropTypes.string',
+        '});',
+        'Test.propTypes = propTypes;'
+      ].join('\n'),
+      parser: 'eslint',
+      settings: Object.assign({}, settings, {
+        propWrapperFunctions: ['forbidExtraProps']
+      }),
+      errors: [
+        {message: '\'lastname\' is missing in props validation'}
+      ]
+    }, {
+      code: [
+        'class Test extends Foo.Component {',
+        '  render() {',
+        '    return (',
+        '      <div>{this.props.firstname} {this.props.lastname}</div>',
+        '    );',
+        '  }',
+        '}',
+        'Test.propTypes = forbidExtraProps({',
+        '  firstname: PropTypes.string',
+        '});'
+      ].join('\n'),
+      parser: 'eslint',
+      settings: Object.assign({}, settings, {
+        propWrapperFunctions: ['forbidExtraProps']
+      }),
       errors: [
         {message: '\'lastname\' is missing in props validation'}
       ]
