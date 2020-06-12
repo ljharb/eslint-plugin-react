@@ -1460,5 +1460,30 @@ ruleTester.run('forbid-prop-types', rule, {
       checkChildContextTypes: true
     }],
     errors: 1
+  }, {
+    code: [
+      'import { object, string } from "prop-types";',
+      'function C({ a, b }) { return [a, b]; }',
+      'C.propTypes = {',
+      '  a: object,',
+      '  b: string',
+      '};'
+    ].join('\n'),
+    options: [{
+      forbid: ['object']
+    }],
+    errors: 1
+  }, {
+    code: [
+      'import { objectOf, any } from "prop-types";',
+      'function C({ a }) { return a; }',
+      'C.propTypes = {',
+      '  a: objectOf(any)',
+      '};'
+    ].join('\n'),
+    options: [{
+      forbid: ['any']
+    }],
+    errors: 1
   }]
 });
