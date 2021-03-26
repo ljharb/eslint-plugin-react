@@ -114,6 +114,39 @@ ruleTester.run('jsx-max-depth', rule, {
       '  return <div>{A}</div>;',
       '}'
     ].join('\n')
+  }, {
+    code: [
+      'class WarnModal extends Component {',
+      '  render() {',
+      '    const { cancelMsg, acceptMsg, isOpen, onAccept, classes, children } = this.props;',
+      '    let { onClose, onCancel } = this.props;',
+      '    if (!onClose) onClose = onCancel;',
+      '    if (!onCancel) onCancel = onClose;',
+      '',
+      '    return (',
+      '      <div className="custom_modal">',
+      '        <Modal className={classes.modal} open={isOpen} closeAfterTransition>',
+      '          <Fade in={isOpen}>',
+      '            <DialogContent>',
+      '              <Icon icon="cancel" onClick={onClose} popoverText="Close Modal" />',
+      '              <div className="modal_content">{children}</div>',
+      '              <div className={clxs(\'modal_buttons\', classes.buttons)}>',
+      '                <Button className="modal_buttons--cancel" onClick={onCancel}>',
+      '                  {cancelMsg ? cancelMsg : \'Cancel\'}',
+      '                </Button>',
+      '                <Button className="modal_buttons--accept" onClick={onAccept}>',
+      '                  {acceptMsg ? acceptMsg : \'Accept\'}',
+      '                  </Button>',
+      '              </div>',
+      '            </DialogContent>',
+      '          </Fade>',
+      '        </Modal>',
+      '        </div>',
+      '    );',
+      '  }',
+      '}'
+    ].join('\n'),
+    options: [{max: 5}]
   }],
 
   invalid: [{
