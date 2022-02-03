@@ -6689,6 +6689,18 @@ ruleTester.run('no-unused-prop-types', rule, {
         { message: '\'foo\' PropType is defined but prop is never used' },
         { message: '\'propTypes\' PropType is defined but prop is never used' },
       ],
+    },
+    {
+      code: `
+        const Comp = (props) => <div className={props.nested.className}>{props.nested.text}</div>;
+        Comp.propTypes = {
+            nested: PropTypes.object.isRequired,
+            text: PropTypes.string.isRequired
+        };
+      `,
+      errors: [
+        { message: '\'text\' PropType is defined but prop is never used' },
+      ],
     }
   )),
 });
