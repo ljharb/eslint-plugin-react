@@ -6701,6 +6701,50 @@ ruleTester.run('no-unused-prop-types', rule, {
         { message: '\'foo\' PropType is defined but prop is never used' },
         { message: '\'propTypes\' PropType is defined but prop is never used' },
       ],
+    },
+    {
+      code: `
+        const DumbComponent = props => {
+          const someObj = { value: 619 };
+          return (
+            <SomeOtherComp {...someObj} />
+          );
+        };
+        
+        DumbComponent.propTypes = {
+          unused_prop: PropTypes.string
+        };
+      `,
+      errors: [
+        { message: '\'unused_prop\' PropType is defined but prop is never used' },
+      ],
+    },
+    {
+      code: `
+        type Props = {
+          unusedPropType: string;
+          link?: string;
+          onClick?: React.MouseEventHandler<HTMLDivElement | HTMLAnchorElement>;
+          children?: React.ReactNode;
+        };
+        
+        export function Tag({ link, onClick, children }: Props) {
+          const props = {
+            onClick,
+            children,
+          };
+        
+          if (link) {
+            return <Link to={link} {...props} />;
+          }
+        
+          return <div {...props} />;
+        }
+      `,
+      features: ['types'],
+      errors: [
+        { message: '\'unusedPropType\' PropType is defined but prop is never used' },
+      ],
     }
   )),
 });
