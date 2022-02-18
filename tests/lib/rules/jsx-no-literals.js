@@ -613,5 +613,76 @@ ruleTester.run('jsx-no-literals', rule, {
         },
       ],
     },
+    {
+      code: `
+        import React from 'react';
+
+        function TestComponent() {
+          return (
+            <div
+              propError1={ \`test\` }
+              propError2={ "test" }
+              propError3={ 'test' }
+              propNoError1="test"
+              propNoError2='test'
+            >
+              {/* these are obvious errors */}
+              Test
+              { "Test" }
+            </div>
+          );
+        }
+        
+        export default TestComponent;
+      `,
+      options: [{ noStrings: true, ignoreProps: false, noAttributeStrings: true }],
+      errors: [
+        {
+          messageId: 'noStringsInAttributes',
+          data: { text: '`test`' },
+          line: 7,
+        },
+        {
+          messageId: 'noStringsInAttributes',
+          data: { text: '"test"' },
+          line: 8,
+        },
+        {
+          messageId: 'noStringsInAttributes',
+          data: { text: '\'test\'' },
+          line: 9,
+        },
+        {
+          messageId: 'invalidPropValue',
+          data: { text: 'propNoError1="test"' },
+          line: 10,
+        },
+        {
+          messageId: 'noStringsInAttributes',
+          data: { text: '"test"' },
+          line: 10,
+        },
+        {
+          messageId: 'invalidPropValue',
+          data: { text: 'propNoError2=\'test\'' },
+          line: 11,
+        },
+        {
+          messageId: 'noStringsInAttributes',
+          data: { text: '\'test\'' },
+          line: 11,
+        },
+        {
+          messageId: 'literalNotInJSXExpression',
+          data: { text: 'Test' },
+          line: 14,
+        },
+        {
+          messageId: 'noStringsInJsx',
+          data: { text: '"Test"' },
+          line: 15,
+        },
+      ],
+    },
   ]),
 });
