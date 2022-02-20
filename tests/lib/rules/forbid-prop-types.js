@@ -837,7 +837,28 @@ ruleTester.run('forbid-prop-types', rule, {
             o: PropTypes.object
         };
       `,
-      errors: 4,
+      errors: [
+        {
+          messageId: 'forbiddenPropType',
+          data: { target: 'array' },
+          line: 8,
+        },
+        {
+          messageId: 'forbiddenPropType',
+          data: { target: 'object' },
+          line: 9,
+        },
+        {
+          messageId: 'forbiddenPropType',
+          data: { target: 'array' },
+          line: 17,
+        },
+        {
+          messageId: 'forbiddenPropType',
+          data: { target: 'object' },
+          line: 18,
+        },
+      ],
     },
     {
       code: `
@@ -1766,6 +1787,20 @@ ruleTester.run('forbid-prop-types', rule, {
         {
           messageId: 'forbiddenPropType',
           data: { target: 'object' },
+        },
+      ],
+    },
+    {
+      code: `
+        AwesomeComponent.propTypes = {
+          foo: PropTypes.arrayOf(PropTypes.any)
+        };
+      `,
+      options: [{ forbid: ['any'] }],
+      errors: [
+        {
+          messageId: 'forbiddenPropType',
+          data: { target: 'any' },
         },
       ],
     },
