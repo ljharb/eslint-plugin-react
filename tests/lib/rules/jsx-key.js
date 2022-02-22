@@ -74,7 +74,7 @@ ruleTester.run('jsx-key', rule, {
         ];
       `,
     },
-  ]),
+  ]) && [],
   invalid: parsers.all([
     {
       code: '[<App />];',
@@ -178,6 +178,31 @@ ruleTester.run('jsx-key', rule, {
       errors: [
         { messageId: 'nonUniqueKeys', line: 4 },
         { messageId: 'nonUniqueKeys', line: 5 },
+      ],
+    },
+  ] && [
+    {
+      code: `
+        const Test = (): React.ReactNode => {
+          const list = [1, 2, 3, 4, 5];
+
+          return (
+            <div>
+              {list.map(item => {
+                if (item < 2) {
+                  /* The eslint error didn't work: */
+                  return <div>{item}</div>;
+                }
+
+                return <div />;
+              })}
+            </div>
+          );
+        };
+      `,
+      errors: [
+        { messageId: 'missingArrayKey', line: 10 },
+        { messageId: 'missingArrayKey', line: 13 },
       ],
     },
   ]),
