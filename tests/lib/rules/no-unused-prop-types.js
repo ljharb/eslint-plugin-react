@@ -3960,6 +3960,82 @@ ruleTester.run('no-unused-prop-types', rule, {
       `,
       features: ['types'],
     },
+    {
+      code: `
+        import React, { FunctionComponent } from "react";
+        import "./styles.css";
+        import Slide from "./Slide";
+      
+        interface SlideProps {
+          isActive: boolean; // (*)
+        }
+      
+        const MyCard: FunctionComponent<{ doo: boolean }> = ({ doo }) => {
+          return doo ? <div>1</div> : <div>0</div>;
+        }
+      
+        export default function App() {
+          return (
+            <div className="App">
+              <Slide>{({ isActive }: SlideProps) => <MyCard doo={isActive} /> }</Slide>
+            </div>
+          );
+        }
+      `,
+      features: ['types'],
+    },
+    {
+      code: `
+        type MessageElementProps = {
+          message: Message
+          account: Account
+        }
+        const SelfMessage = (props: MessageElementProps) =>
+          <Stack
+            flexDirection='row'
+            justifyContent='flex-end'
+            key={props.message.id ?? props.message.createdAt.toString()}
+            spacing={1}
+          >
+            <Stack>
+              {props.message.status === MessageStatus.Read &&
+                <DoneAllIcon />}
+              <Paper sx={{
+                maxWidth: MESSAGE_MAXWIDTH,
+                padding: PADDING,
+                backgroundColor: backgroundColor(props.message.status),
+                color: theme => theme.palette.primary.contrastText,
+              }}
+              >
+                {props.message.content}
+              </Paper>
+              {props.message.status === MessageStatus.Error &&
+                <Typography variant='helperText'>
+                  <WarningIcon />
+                  Message not sent. Click to retry. (Not yet implemented)
+                </Typography>}
+            </Stack>
+          </Stack>
+        
+        const CorrespondantMessage = (props: MessageElementProps) =>
+          <Stack
+            direction='row'
+            key={props.message.id ?? props.message.createdAt.toString()}
+            spacing={1}
+          >
+            <AccountAvatar account={props.account} size={42} />
+            <Paper sx={{
+              maxWidth: MESSAGE_MAXWIDTH,
+              padding: PADDING,
+              backgroundColor: 'background.input',
+            }}
+            >
+              {props.message.content}
+            </Paper>
+          </Stack>
+      `,
+      features: ['types'],
+    },
   ]),
 
   invalid: parsers.all([].concat(
