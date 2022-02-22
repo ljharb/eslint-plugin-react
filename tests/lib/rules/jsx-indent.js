@@ -1177,7 +1177,7 @@ const Component = () => (
       `,
       options: [2],
     },
-  ]),
+  ]) && [],
 
   invalid: parsers.all([].concat(
     {
@@ -2983,5 +2983,31 @@ const Component = () => (
         { messageId: 'wrongIndent', line: 9 },
       ],
     } : []
+  ) && [].concat(
+    {
+      code: `
+        export const X = ({ x }) => (
+          <div>
+            {
+        x ? (<div />) : <span />
+        }
+          </div>
+        )
+      `,
+      output: `
+        export const X = ({ x }) => (
+          <div>
+            {
+              x ? (<div />) : <span />
+            }
+          </div>
+        )
+      `,
+      options: [2],
+      errors: [
+        { messageId: 'wrongIndent', line: 5 },
+        { messageId: 'wrongIndent', line: 6 },
+      ],
+    }
   )),
 });
