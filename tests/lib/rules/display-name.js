@@ -10,6 +10,7 @@
 // ------------------------------------------------------------------------------
 
 const RuleTester = require('eslint').RuleTester;
+const flatMap = require('array.prototype.flatmap');
 const rule = require('../../../lib/rules/display-name');
 
 const parsers = require('../../helpers/parsers');
@@ -28,7 +29,7 @@ const parserOptions = {
 
 const ruleTester = new RuleTester({ parserOptions });
 ruleTester.run('display-name', rule, {
-  valid: parsers.all([
+  valid: parsers.all([].concat(
     {
       code: `
         var Hello = createReactClass({
@@ -579,9 +580,26 @@ ruleTester.run('display-name', rule, {
         }
       `,
     },
-  ]),
+    flatMap(['0.14.10', '15.7.0', '16.12.0'], (version) => [
+      {
+        // React does not handle the result of forwardRef being passed into memo
+        // ComponentWithMemoAndForwardRef gets shown as Memo(Anonymous)
+        // See https://github.com/facebook/react/issues/16722
+        code: `
+            import React from 'react'
+  
+            const MemoizedForwardRefComponentLike = React.memo(
+              React.forwardRef(function ComponentLike({ world }, ref) {
+                return <div ref={ref}>Hello {world}</div>
+              })
+            )
+          `,
+        settings: { react: { version } },
+      },
+    ])
+  )),
 
-  invalid: parsers.all([
+  invalid: parsers.all([].concat(
     {
       code: `
         var Hello = createReactClass({
@@ -591,10 +609,7 @@ ruleTester.run('display-name', rule, {
         });
       `,
       options: [{ ignoreTranspilerName: true }],
-      errors: [
-        {
-          messageId: 'noDisplayName',
-        }],
+      errors: [{ messageId: 'noDisplayName' }],
     },
     {
       code: `
@@ -800,50 +815,92 @@ ruleTester.run('display-name', rule, {
       `,
       errors: [{ messageId: 'noDisplayName' }],
     },
-    {
-    // Only trigger an error for the outer React.memo
-      code: `
-        import React from 'react'
+    flatMap(['0.14.9', '15.6.999', '16.11.999'], (version) => [
+      {
+      // Only trigger an error for the outer React.memo
+        code: `
+          import React from 'react'
 
-        const MemoizedForwardRefComponentLike = React.memo(
-          React.forwardRef(({ world }, ref) => {
-            return <div ref={ref}>Hello {world}</div>
+          const MemoizedForwardRefComponentLike = React.memo(
+            React.forwardRef(({ world }, ref) => {
+              return <div ref={ref}>Hello {world}</div>
+            })
+          )
+        `,
+        settings: { react: { version } },
+        errors: [
+          { messageId: 'noDisplayName', line: 4 },
+        ],
+      },
+      {
+      // Only trigger an error for the outer React.memo
+        code: `
+          import React from 'react'
+
+          const MemoizedForwardRefComponentLike = React.memo(
+            React.forwardRef(function({ world }, ref) {
+              return <div ref={ref}>Hello {world}</div>
           })
-        )
-      `,
-      errors: [
-        {
-          messageId: 'noDisplayName',
-        }],
-    },
-    {
-    // Only trigger an error for the outer React.memo
-      code: `
-        import React from 'react'
+          )
+        `,
+        settings: { react: { version } },
+        errors: [
+          { messageId: 'noDisplayName', line: 4 },
+        ],
+      },
+      {
+      // React does not handle the result of forwardRef being passed into memo
+      // ComponentWithMemoAndForwardRef gets shown as Memo(Anonymous)
+      // See https://github.com/facebook/react/issues/16722
+        code: `
+          import React from 'react'
 
-        const MemoizedForwardRefComponentLike = React.memo(
-          React.forwardRef(function({ world }, ref) {
-            return <div ref={ref}>Hello {world}</div>
-        })
-        )
-      `,
-      errors: [{ messageId: 'noDisplayName' }],
-    },
-    {
-    // React does not handle the result of forwardRef being passed into memo
-    // ComponentWithMemoAndForwardRef gets shown as Memo(Anonymous)
-    // See https://github.com/facebook/react/issues/16722
-      code: `
-        import React from 'react'
-
-        const MemoizedForwardRefComponentLike = React.memo(
-          React.forwardRef(function ComponentLike({ world }, ref) {
-            return <div ref={ref}>Hello {world}</div>
-          })
-        )
-      `,
-      errors: [{ messageId: 'noDisplayName' }],
-    },
+          const MemoizedForwardRefComponentLike = React.memo(
+            React.forwardRef(function ComponentLike({ world }, ref) {
+              return <div ref={ref}>Hello {world}</div>
+            })
+          )
+        `,
+        settings: { react: { version } },
+        errors: [
+          { messageId: 'noDisplayName', line: 4 },
+        ],
+      },
+    ]),
+    flatMap(['0.14.10', '15.7.0', '16.12.0'], (version) => [
+      {
+        // Only trigger an error for the outer React.memo
+        code: `
+            import React from 'react'
+  
+            const MemoizedForwardRefComponentLike = React.memo(
+              React.forwardRef(({ world }, ref) => {
+                return <div ref={ref}>Hello {world}</div>
+              })
+            )
+          `,
+        settings: { react: { version } },
+        errors: [
+          { messageId: 'noDisplayName', line: 4 },
+        ],
+      },
+      {
+        // Only trigger an error for the outer React.memo
+        code: `
+            import React from 'react'
+  
+            const MemoizedForwardRefComponentLike = React.memo(
+              React.forwardRef(function({ world }, ref) {
+                return <div ref={ref}>Hello {world}</div>
+            })
+            )
+          `,
+        settings: { react: { version } },
+        errors: [
+          { messageId: 'noDisplayName', line: 4 },
+        ],
+      },
+    ]),
     {
       code: `
         import React from "react";
@@ -984,6 +1041,6 @@ ruleTester.run('display-name', rule, {
           line: 9,
         },
       ],
-    },
-  ]),
+    }
+  )),
 });
