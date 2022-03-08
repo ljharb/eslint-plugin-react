@@ -1229,6 +1229,22 @@ const Component = () => (
       `,
       options: [2],
     },
+    {
+      code: `
+        class Foo extends React.Component {
+          render(): React.Node {
+            const {forwardedRef, isDisabled, key} = this.props;
+      
+            return <WrappedComponent
+              forwardedRef={forwardedRef}
+              isDisabled={isDisabled}
+              key={key}
+              svgElement={svgElement} />;
+          }
+        }
+      `,
+      features: ['types'],
+    },
   ]),
 
   invalid: parsers.all([].concat(
