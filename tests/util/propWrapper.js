@@ -1,7 +1,13 @@
 'use strict';
 
 const assert = require('assert');
-const propWrapperUtil = require('../../lib/util/propWrapper');
+const {
+  getPropWrapperFunctions,
+  isPropWrapperFunction,
+  getExactPropWrapperFunctions,
+  isExactPropWrapperFunction,
+  formatPropWrapperFunctions,
+} = require('../../lib/util/propWrapper');
 
 describe('PropWrapperFunctions', () => {
   describe('getPropWrapperFunctions', () => {
@@ -17,14 +23,14 @@ describe('PropWrapperFunctions', () => {
           propWrapperFunctions,
         },
       };
-      assert.deepStrictEqual(propWrapperUtil.getPropWrapperFunctions(context), new Set(propWrapperFunctions));
+      assert.deepStrictEqual(getPropWrapperFunctions(context), new Set(propWrapperFunctions));
     });
 
     it('returns empty set if no setting', () => {
       const context = {
         settings: {},
       };
-      assert.deepStrictEqual(propWrapperUtil.getPropWrapperFunctions(context), new Set([]));
+      assert.deepStrictEqual(getPropWrapperFunctions(context), new Set([]));
     });
   });
 
@@ -35,7 +41,7 @@ describe('PropWrapperFunctions', () => {
           propWrapperFunctions: ['Object.freeze'],
         },
       };
-      assert.equal(propWrapperUtil.isPropWrapperFunction(context, 'Object.freeze'), true);
+      assert.equal(isPropWrapperFunction(context, 'Object.freeze'), true);
     });
 
     it('with Object with object and property keys', () => {
@@ -49,7 +55,7 @@ describe('PropWrapperFunctions', () => {
           ],
         },
       };
-      assert.equal(propWrapperUtil.isPropWrapperFunction(context, 'Object.freeze'), true);
+      assert.equal(isPropWrapperFunction(context, 'Object.freeze'), true);
     });
 
     it('with Object with only property key', () => {
@@ -62,7 +68,7 @@ describe('PropWrapperFunctions', () => {
           ],
         },
       };
-      assert.equal(propWrapperUtil.isPropWrapperFunction(context, 'forbidExtraProps'), true);
+      assert.equal(isPropWrapperFunction(context, 'forbidExtraProps'), true);
     });
   });
 
@@ -80,7 +86,7 @@ describe('PropWrapperFunctions', () => {
           propWrapperFunctions,
         },
       };
-      assert.deepStrictEqual(propWrapperUtil.getExactPropWrapperFunctions(context), new Set([{
+      assert.deepStrictEqual(getExactPropWrapperFunctions(context), new Set([{
         property: 'forbidExtraProps',
         exact: true,
       }]));
@@ -98,14 +104,14 @@ describe('PropWrapperFunctions', () => {
           propWrapperFunctions,
         },
       };
-      assert.deepStrictEqual(propWrapperUtil.getExactPropWrapperFunctions(context), new Set([]));
+      assert.deepStrictEqual(getExactPropWrapperFunctions(context), new Set([]));
     });
 
     it('returns empty set if no setting', () => {
       const context = {
         settings: {},
       };
-      assert.deepStrictEqual(propWrapperUtil.getExactPropWrapperFunctions(context), new Set([]));
+      assert.deepStrictEqual(getExactPropWrapperFunctions(context), new Set([]));
     });
   });
 
@@ -116,7 +122,7 @@ describe('PropWrapperFunctions', () => {
           propWrapperFunctions: ['Object.freeze'],
         },
       };
-      assert.equal(propWrapperUtil.isExactPropWrapperFunction(context, 'Object.freeze'), false);
+      assert.equal(isExactPropWrapperFunction(context, 'Object.freeze'), false);
     });
 
     it('with Object with object and property keys', () => {
@@ -131,7 +137,7 @@ describe('PropWrapperFunctions', () => {
           ],
         },
       };
-      assert.equal(propWrapperUtil.isExactPropWrapperFunction(context, 'Object.freeze'), true);
+      assert.equal(isExactPropWrapperFunction(context, 'Object.freeze'), true);
     });
 
     it('with Object with only property key', () => {
@@ -145,14 +151,14 @@ describe('PropWrapperFunctions', () => {
           ],
         },
       };
-      assert.equal(propWrapperUtil.isExactPropWrapperFunction(context, 'forbidExtraProps'), true);
+      assert.equal(isExactPropWrapperFunction(context, 'forbidExtraProps'), true);
     });
   });
 
   describe('formatPropWrapperFunctions', () => {
     it('with empty set', () => {
       const propWrappers = new Set([]);
-      assert.equal(propWrapperUtil.formatPropWrapperFunctions(propWrappers), '');
+      assert.equal(formatPropWrapperFunctions(propWrappers), '');
     });
 
     it('with all allowed values', () => {
@@ -167,7 +173,7 @@ describe('PropWrapperFunctions', () => {
           object: 'foo',
         },
       ]);
-      assert.equal(propWrapperUtil.formatPropWrapperFunctions(propWrappers), '\'Object.freeze\', \'exact\', \'foo.bar\'');
+      assert.equal(formatPropWrapperFunctions(propWrappers), '\'Object.freeze\', \'exact\', \'foo.bar\'');
     });
   });
 });

@@ -1,6 +1,6 @@
 'use strict';
 
-const version = require('eslint/package.json').version;
+const { version } = require('eslint/package.json');
 const semver = require('semver');
 
 const isESLintV8 = semver.major(version) >= 8;

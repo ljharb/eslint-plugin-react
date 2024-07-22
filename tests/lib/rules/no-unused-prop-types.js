@@ -2504,7 +2504,7 @@ ruleTester.run('no-unused-prop-types', rule, {
           bar: PropTypes.func,
         }
       `,
-      parserOptions: Object.assign({}, parserOptions, { ecmaVersion: 2017 }),
+      parserOptions: { ...parserOptions, ecmaVersion: 2017 },
     },
     {
       // Multiple props used inside of an async function
@@ -2523,7 +2523,7 @@ ruleTester.run('no-unused-prop-types', rule, {
           bar: PropTypes.func,
         }
       `,
-      parserOptions: Object.assign({}, parserOptions, { ecmaVersion: 2017 }),
+      parserOptions: { ...parserOptions, ecmaVersion: 2017 },
     },
     {
       // Multiple props used inside of an async arrow function
@@ -2542,7 +2542,7 @@ ruleTester.run('no-unused-prop-types', rule, {
           bar: PropTypes.func,
         }
       `,
-      parserOptions: Object.assign({}, parserOptions, { ecmaVersion: 2017 }),
+      parserOptions: { ...parserOptions, ecmaVersion: 2017 },
     },
     {
       // Destructured assignment with Shape propTypes issue #816
@@ -5415,7 +5415,7 @@ ruleTester.run('no-unused-prop-types', rule, {
           baz: PropTypes.func,
         }
       `,
-      parserOptions: Object.assign({}, parserOptions, { ecmaVersion: 2017 }),
+      parserOptions: { ...parserOptions, ecmaVersion: 2017 },
       errors: [
         {
           messageId: 'unusedPropType',
@@ -5443,7 +5443,7 @@ ruleTester.run('no-unused-prop-types', rule, {
           baz: PropTypes.func,
         }
       `,
-      parserOptions: Object.assign({}, parserOptions, { ecmaVersion: 2017 }),
+      parserOptions: { ...parserOptions, ecmaVersion: 2017 },
       errors: [
         {
           messageId: 'unusedPropType',
@@ -6684,6 +6684,6 @@ ruleTester.run('no-unused-prop-types', rule, {
       errors: [
         { message: '\'bar\' PropType is defined but prop is never used' },
       ],
-    }
+    },
   )),
 });

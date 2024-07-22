@@ -660,7 +660,7 @@ ruleTester.run('forbid-prop-types', rule, {
           b: PropTypes.array(),
         }
       `,
-    }
+    },
   )),
 
   invalid: parsers.all([

@@ -268,6 +268,6 @@ ruleTester.run('jsx-no-useless-fragment', rule, {
       errors: [{ messageId: 'NeedsMoreChildren', type: 'JSXFragment' }],
       output: '<Foo>{moo}</Foo>',
       features: ['fragment'],
-    }
+    },
   )),
 });

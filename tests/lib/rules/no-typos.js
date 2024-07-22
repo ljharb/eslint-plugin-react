@@ -9,7 +9,7 @@
 // -----------------------------------------------------------------------------
 
 const semver = require('semver');
-const version = require('eslint/package.json').version;
+const { version } = require('eslint/package.json');
 const RuleTester = require('../../helpers/ruleTester');
 
 const rule = require('../../../lib/rules/no-typos');
@@ -575,13 +575,14 @@ ruleTester.run('no-typos', rule, {
         }
       `,
       features: ['class fields'],
-      parserOptions: Object.assign({}, parserOptions, {
+      parserOptions: {
+        ...parserOptions,
         babelOptions: {
-          // classPrivateMethods: true,
+        // classPrivateMethods: true,
         },
         shippedProposals: true,
-      }),
-    }
+      },
+    },
   )),
 
   invalid: parsers.all([].concat(
@@ -1917,6 +1918,6 @@ ruleTester.run('no-typos', rule, {
       `,
       parserOptions,
       errors: [{ messageId: 'noPropTypesBinding' }],
-    }
+    },
   )),
 });

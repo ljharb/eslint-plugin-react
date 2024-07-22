@@ -145,7 +145,7 @@ ruleTester.run('jsx-props-no-multi-spaces', rule, {
           type="button"
         />
       `,
-    }
+    },
   )),
 
   invalid: parsers.all([].concat(
@@ -359,6 +359,6 @@ ruleTester.run('jsx-props-no-multi-spaces', rule, {
           data: { prop1: 'onClick', prop2: 'type' },
         },
       ],
-    }
+    },
   )),
 });

@@ -1,13 +1,16 @@
 'use strict';
 
 const assert = require('assert');
-const linkComponentsUtil = require('../../lib/util/linkComponents');
+const {
+  getLinkComponents,
+  getFormComponents,
+} = require('../../lib/util/linkComponents');
 
 describe('linkComponentsFunctions', () => {
   describe('getLinkComponents', () => {
     it('returns a default map of components', () => {
       const context = {};
-      assert.deepStrictEqual(linkComponentsUtil.getLinkComponents(context), new Map([
+      assert.deepStrictEqual(getLinkComponents(context), new Map([
         ['a', ['href']],
       ]));
     });
@@ -29,7 +32,7 @@ describe('linkComponentsFunctions', () => {
           linkComponents,
         },
       };
-      assert.deepStrictEqual(linkComponentsUtil.getLinkComponents(context), new Map([
+      assert.deepStrictEqual(getLinkComponents(context), new Map([
         ['a', ['href']],
         ['Hyperlink', ['href']],
         ['Link', ['to']],
@@ -41,7 +44,7 @@ describe('linkComponentsFunctions', () => {
   describe('getFormComponents', () => {
     it('returns a default map of components', () => {
       const context = {};
-      assert.deepStrictEqual(linkComponentsUtil.getFormComponents(context), new Map([
+      assert.deepStrictEqual(getFormComponents(context), new Map([
         ['form', ['action']],
       ]));
     });
@@ -63,7 +66,7 @@ describe('linkComponentsFunctions', () => {
           formComponents,
         },
       };
-      assert.deepStrictEqual(linkComponentsUtil.getFormComponents(context), new Map([
+      assert.deepStrictEqual(getFormComponents(context), new Map([
         ['form', ['action']],
         ['Form', ['action']],
         ['MyForm', ['endpoint']],

@@ -602,6 +602,6 @@ ruleTester.run('no-unescaped-entities', rule, {
           ],
         },
       ],
-    }
+    },
   )),
 });

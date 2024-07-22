@@ -156,6 +156,6 @@ ruleTester.run('jsx-equals-spacing', rule, {
         { messageId: 'needSpaceAfter', type: 'JSXAttribute' },
         { messageId: 'needSpaceAfter', type: 'JSXAttribute' },
       ],
-    }
+    },
   )),
 });

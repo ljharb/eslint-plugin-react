@@ -811,7 +811,7 @@ ruleTester.run('require-default-props', rule, {
           return <div>{foo}{bar}</div>;
         }
       `,
-      parserOptions: Object.assign({ sourceType: 'module' }, parserOptions),
+      parserOptions: { sourceType: 'module', ...parserOptions },
     },
     {
       code: `
@@ -824,7 +824,7 @@ ruleTester.run('require-default-props', rule, {
           return <div>{foo}{bar}</div>;
         }
       `,
-      parserOptions: Object.assign({ sourceType: 'module' }, parserOptions),
+      parserOptions: { sourceType: 'module', ...parserOptions },
     },
     // using spread operator
     {

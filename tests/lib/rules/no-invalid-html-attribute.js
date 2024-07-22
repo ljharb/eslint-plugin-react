@@ -1950,6 +1950,6 @@ ruleTester.run('no-invalid-html-attribute', rule, {
           type: 'Literal',
         },
       ],
-    }
+    },
   )),
 });

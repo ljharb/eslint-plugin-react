@@ -4,10 +4,10 @@ const assert = require('assert');
 const sinon = require('sinon');
 const espree = require('espree');
 
-const ast = require('../../lib/util/ast');
-
-const traverseReturns = ast.traverseReturns;
-const isFunctionLike = ast.isFunctionLike;
+const {
+  traverseReturns,
+  isFunctionLike,
+} = require('../../lib/util/ast');
 
 const DEFAULT_CONFIG = {
   ecmaVersion: 6,

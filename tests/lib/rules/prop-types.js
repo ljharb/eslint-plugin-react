@@ -4990,7 +4990,7 @@ ruleTester.run('prop-types', rule, {
         );
       `,
       features: ['types'],
-    }
+    },
   )),
 
   invalid: parsers.all([].concat(
@@ -6086,9 +6086,7 @@ ruleTester.run('prop-types', rule, {
           firstname: PropTypes.string
         });
       `,
-      settings: Object.assign({}, settings, {
-        propWrapperFunctions: ['forbidExtraProps'],
-      }),
+      settings: { ...settings, propWrapperFunctions: ['forbidExtraProps'] },
       errors: [
         {
           messageId: 'missingPropType',
@@ -6109,9 +6107,7 @@ ruleTester.run('prop-types', rule, {
           firstname: PropTypes.string
         });
       `,
-      settings: Object.assign({}, settings, {
-        propWrapperFunctions: ['Object.freeze'],
-      }),
+      settings: { ...settings, propWrapperFunctions: ['Object.freeze'] },
       errors: [
         {
           messageId: 'missingPropType',
@@ -6786,9 +6782,7 @@ ruleTester.run('prop-types', rule, {
         }
       `,
       features: ['class fields'],
-      settings: Object.assign({}, settings, {
-        propWrapperFunctions: ['forbidExtraProps'],
-      }),
+      settings: { ...settings, propWrapperFunctions: ['forbidExtraProps'] },
       errors: [
         {
           messageId: 'missingPropType',
@@ -6909,9 +6903,7 @@ ruleTester.run('prop-types', rule, {
         }
       `,
       features: ['class fields'],
-      settings: Object.assign({}, settings, {
-        propWrapperFunctions: ['forbidExtraProps'],
-      }),
+      settings: { ...settings, propWrapperFunctions: ['forbidExtraProps'] },
       errors: [
         {
           messageId: 'missingPropType',
@@ -9078,6 +9070,6 @@ ruleTester.run('prop-types', rule, {
           data: { name: 'prop$.events.map' },
         },
       ],
-    }
+    },
   )),
 });

@@ -86,7 +86,7 @@ ruleTester.run('jsx-no-undef', rule, {
           );
         };
       `,
-      parserOptions: Object.assign({ sourceType: 'module' }, parserOptions),
+      parserOptions: { sourceType: 'module', ...parserOptions },
       options: [{ allowGlobals: false }],
     },
   ].map(parsers.disableNewTS)),
@@ -137,7 +137,7 @@ ruleTester.run('jsx-no-undef', rule, {
         };
         export default TextWrapper;
       `,
-      parserOptions: Object.assign({ sourceType: 'module' }, parserOptions),
+      parserOptions: { sourceType: 'module', ...parserOptions },
       errors: [
         {
           messageId: 'undefined',

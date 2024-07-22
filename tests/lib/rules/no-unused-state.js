@@ -1109,7 +1109,7 @@ eslintTester.run('no-unused-state', rule, {
         }
       `,
       features: ['types', 'class fields'],
-    }
+    },
   )),
 
   invalid: parsers.all([

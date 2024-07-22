@@ -284,16 +284,18 @@ ruleTester.run('no-did-mount-set-state', rule, {
       `,
     },
     invalid.map((test) => {
-      const newTest = Object.assign({}, test, {
-        settings: Object.assign({}, test.settings, {
+      const newTest = {
+        ...test,
+        settings: {
+          ...test.settings,
           react: {
             version: '16.3.0',
           },
-        }),
-      });
+        },
+      };
       delete newTest.errors;
       return newTest;
-    })
+    }),
   )),
 
   invalid: parsers.all(invalid),

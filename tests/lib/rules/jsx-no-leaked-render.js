@@ -1000,6 +1000,6 @@ ruleTester.run('jsx-no-leaked-render', rule, {
         line: 4,
         column: 33,
       }],
-    }
+    },
   )),
 });

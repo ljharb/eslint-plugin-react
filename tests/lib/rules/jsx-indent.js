@@ -3161,6 +3161,6 @@ const Component = () => (
         { messageId: 'wrongIndent', line: 6 },
         { messageId: 'wrongIndent', line: 9 },
       ],
-    }
+    },
   )),
 });

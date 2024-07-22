@@ -494,7 +494,7 @@ ruleTester.run('sort-prop-types', rule, {
       `,
       features: ['types'],
       options: [{ checkTypes: true }],
-    }
+    },
   )),
   invalid: parsers.all([].concat(
     {
@@ -2395,6 +2395,6 @@ ruleTester.run('sort-prop-types', rule, {
           column: 102,
         },
       ],
-    }
+    },
   )),
 });
