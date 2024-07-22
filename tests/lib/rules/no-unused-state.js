@@ -593,7 +593,7 @@ eslintTester.run('no-unused-state', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+      features: ['class fields'],
     },
     {
       code: `
@@ -611,7 +611,7 @@ eslintTester.run('no-unused-state', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+      features: ['class fields'],
     },
     {
       code: `
@@ -629,7 +629,7 @@ eslintTester.run('no-unused-state', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+      features: ['class fields'],
     },
     {
       code: `
@@ -647,7 +647,7 @@ eslintTester.run('no-unused-state', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+      features: ['class fields'],
     },
     {
       code: `
@@ -770,7 +770,7 @@ eslintTester.run('no-unused-state', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+      features: ['class fields'],
     },
     {
       code: `
@@ -792,7 +792,7 @@ eslintTester.run('no-unused-state', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+      features: ['class fields'],
     },
     {
       code: `
@@ -814,7 +814,7 @@ eslintTester.run('no-unused-state', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+      features: ['class fields'],
     },
     {
       code: `
@@ -851,7 +851,6 @@ eslintTester.run('no-unused-state', rule, {
           }
         });
       `,
-      features: ['no-ts-old'], // TODO: FIXME: remove "no-ts-old"
     },
     {
       code: `
@@ -869,7 +868,7 @@ eslintTester.run('no-unused-state', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+      features: ['class fields'],
     },
     {
       code: `
@@ -886,7 +885,7 @@ eslintTester.run('no-unused-state', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove "no-ts-old"
+      features: ['class fields'],
     },
     {
       // Don't error out
@@ -1005,7 +1004,7 @@ eslintTester.run('no-unused-state', rule, {
           };
         }
       `,
-      features: ['ts', 'no-babel-old', 'no-ts-old'],
+      features: ['ts', 'no-babel-old'],
     } : [],
     {
       code: `

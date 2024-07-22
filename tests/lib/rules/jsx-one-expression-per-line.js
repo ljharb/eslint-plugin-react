@@ -189,7 +189,7 @@ ruleTester.run('jsx-one-expression-per-line', rule, {
           <Foo />
         </>
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
     },
     {
       code: `
@@ -198,7 +198,7 @@ ruleTester.run('jsx-one-expression-per-line', rule, {
           <Bar />
         </>
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
     },
     {
       code: '<App>Hello {name}</App>',
@@ -1382,7 +1382,7 @@ foo
           data: { descriptor: '{"foo"}' },
         },
       ],
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       parserOptions,
     },
     {
@@ -1424,7 +1424,7 @@ foo
           data: { descriptor: 'Foo' },
         },
       ],
-      features: ['fragment', 'no-ts-old'],
+      features: ['fragment'],
       parserOptions,
     },
     {

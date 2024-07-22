@@ -84,15 +84,19 @@
     "mocha": "^5.2.0",
     "npmignore": "^0.3.1",
     "sinon": "^7.5.0",
-    "typescript": "^5.7.0-dev.20240912",
+    "typescript": "next",
     "typescript-eslint-parser": "^20.1.1"
   },
   "peerDependencies": {
     "@babel/eslint-parser": "^7.25.1",
+    "@typescript-eslint/parser": "^8.5",
     "eslint": "^8.57 || ^9.10"
   },
   "peerDependenciesMeta": {
     "@babel/eslint-parser": {
+      "optional": true
+    },
+    "@typescript-eslint/parser": {
       "optional": true
     }
   },

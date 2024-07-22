@@ -391,7 +391,6 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
           return <span>/*</span>;
         };
       `,
-      features: ['no-ts-old'], // the old TS parser hangs forever on this one
     },
     {
       code: `
@@ -400,7 +399,6 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
         };
       `,
       options: [{ props: 'never', children: 'never' }],
-      features: ['no-ts-old'], // the old TS parser hangs forever on this one
     },
     {
       code: `
@@ -411,7 +409,6 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
         };
       `,
       options: [{ props: 'never', children: 'never' }],
-      features: ['no-ts-old'], // the old TS parser hangs forever on this one
     },
     {
       code: `<App>{/* comment */}</App>`,

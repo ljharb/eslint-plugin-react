@@ -179,7 +179,6 @@ ruleTester.run('jsx-no-comment-textnodes', rule, {
           }
         }
       `,
-      features: ['no-ts-old'], // TODO: FIXME: remove this and figure out why the old TS parser hangs here
       errors: [{ messageId: 'putCommentInBraces' }],
     },
     {
@@ -190,7 +189,7 @@ ruleTester.run('jsx-no-comment-textnodes', rule, {
           }
         }
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove this and figure out why the old TS parser hangs here
+      features: ['fragment'],
       errors: [{ messageId: 'putCommentInBraces' }],
     },
     {
@@ -201,7 +200,6 @@ ruleTester.run('jsx-no-comment-textnodes', rule, {
           }
         }
       `,
-      features: ['no-ts-old'], // TODO: FIXME: remove this and figure out why the old TS parser hangs here
       errors: [{ messageId: 'putCommentInBraces' }],
     },
     {
@@ -256,7 +254,6 @@ ruleTester.run('jsx-no-comment-textnodes', rule, {
           return <span>/*</span>;
         };
       `,
-      features: ['no-ts-old'], // TODO: FIXME: remove this and figure out why the old TS parser hangs here
       errors: [{ messageId: 'putCommentInBraces' }],
     },
   ]),

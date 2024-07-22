@@ -94,7 +94,7 @@ ruleTester.run('react-in-jsx-scope', rule, {
     },
     {
       code: 'var a = <>fragment</>;',
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       errors: [
         {
           messageId: 'notInScope',

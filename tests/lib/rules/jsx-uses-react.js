@@ -54,7 +54,7 @@ ruleTester.run('no-unused-vars', rule, {
     },
     {
       code: '/*eslint react/jsx-uses-react:1*/ var React; <></>;',
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: fix for typescript-eslint
+      features: ['fragment'],
     },
   ].map(parsers.disableNewTS)),
   invalid: parsers.all([

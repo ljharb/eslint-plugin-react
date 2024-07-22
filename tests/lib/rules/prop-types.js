@@ -6761,7 +6761,7 @@ ruleTester.run('prop-types', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
       errors: [
         {
           messageId: 'missingPropType',
@@ -7800,7 +7800,7 @@ ruleTester.run('prop-types', rule, {
           };
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
       errors: [
         {
           messageId: 'missingPropType',
@@ -7823,7 +7823,7 @@ ruleTester.run('prop-types', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
       errors: [
         {
           messageId: 'missingPropType',
@@ -7862,7 +7862,7 @@ ruleTester.run('prop-types', rule, {
           }
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
       errors: [
         {
           messageId: 'missingPropType',

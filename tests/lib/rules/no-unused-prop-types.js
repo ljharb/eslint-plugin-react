@@ -2191,7 +2191,7 @@ ruleTester.run('no-unused-prop-types', rule, {
           };
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
     },
     {
       // Multiple props used inside of an async class property
@@ -2209,7 +2209,7 @@ ruleTester.run('no-unused-prop-types', rule, {
           };
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
     },
     {
       code: `
@@ -2264,7 +2264,7 @@ ruleTester.run('no-unused-prop-types', rule, {
           };
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
     },
     {
       // Multiple destructured props inside of async class property
@@ -2283,7 +2283,7 @@ ruleTester.run('no-unused-prop-types', rule, {
           };
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
     },
     {
       code: `
@@ -3020,7 +3020,7 @@ ruleTester.run('no-unused-prop-types', rule, {
         }
       }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
     },
     {
       // Issue #1068
@@ -3045,7 +3045,7 @@ ruleTester.run('no-unused-prop-types', rule, {
         }
       }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
     },
     {
       // Issue #1068
@@ -3070,7 +3070,7 @@ ruleTester.run('no-unused-prop-types', rule, {
         }
       }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
     },
     {
       code: `
@@ -5091,7 +5091,7 @@ ruleTester.run('no-unused-prop-types', rule, {
           };
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
       errors: [
         {
           messageId: 'unusedPropType',
@@ -5165,7 +5165,7 @@ ruleTester.run('no-unused-prop-types', rule, {
           };
         }
       `,
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
       errors: [{ message: '\'foo\' PropType is defined but prop is never used' }],
     },
     {
@@ -6602,7 +6602,7 @@ ruleTester.run('no-unused-prop-types', rule, {
         type StateProps = ReturnType<typeof mapStateToProps>
         type DispatchProps = ReturnType<typeof mapDispatchToProps>
       `,
-      features: ['ts', 'no-ts-old', 'no-babel'], // TODO: FIXME: remove no-ts-old and no-babel and fix
+      features: ['ts', 'no-babel'], // TODO: FIXME: remove no-babel and fix
       errors: [{ message: '\'prop1\' PropType is defined but prop is never used' }],
     },
     // Issue: #296

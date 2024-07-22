@@ -432,7 +432,7 @@ ruleTester.run('jsx-indent', rule, {
         foo ? <></> :
         <></>
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
     },
     {
     // Multiline ternary
@@ -447,7 +447,7 @@ ruleTester.run('jsx-indent', rule, {
         foo ? <></>
         : <></>
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
     },
     {
     // Multiline ternary
@@ -1315,7 +1315,7 @@ const Component = () => (
           <></>
         </App>
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       output: `
         <App>
             <></>
@@ -1686,7 +1686,7 @@ const Component = () => (
             <></>
         ]
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       output: `
         [
           <div />,
@@ -1859,7 +1859,7 @@ const Component = () => (
             <Foo /> :
         <></>
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       output: `
         foo ?
             <Foo /> :
@@ -1934,7 +1934,7 @@ const Component = () => (
         :
         <></>
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       output: `
         foo ?
             <Foo />
@@ -2012,7 +2012,7 @@ const Component = () => (
         ) :
         <></>
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       output: `
         foo ? (
             <Foo />
@@ -2094,7 +2094,7 @@ const Component = () => (
             <></>
             )
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       output: `
         foo ?
             <Foo /> : (
@@ -2179,7 +2179,7 @@ const Component = () => (
             <></>
             )
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       output: `
         foo ?
             <Foo />
@@ -2245,7 +2245,7 @@ const Component = () => (
         <></>
         )
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       output: `
         foo ? (
             <></>
@@ -2366,7 +2366,7 @@ const Component = () => (
         <></>
         )
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       output: `
         foo ? (
             <></>
@@ -2428,7 +2428,7 @@ const Component = () => (
         <></>
         )
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       output: `
         foo ? <Foo /> : (
             <></>
@@ -2480,7 +2480,7 @@ const Component = () => (
         <></>
         )
       `,
-      features: ['fragment', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['fragment'],
       output: `
         foo ? <Foo />
         : (

@@ -1658,7 +1658,7 @@ ruleTester.run('sort-prop-types', rule, {
         }
       `,
       options: [{ sortShapeProp: true }],
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
       errors: [
         {
           messageId: 'propsNotSorted',
@@ -1821,7 +1821,7 @@ ruleTester.run('sort-prop-types', rule, {
         }
       `,
       options: [{ sortShapeProp: true }],
-      features: ['class fields', 'no-ts-old'], // TODO: FIXME: remove no-ts-old and fix
+      features: ['class fields'],
       errors: [
         {
           messageId: 'propsNotSorted',
