@@ -10,7 +10,6 @@
 // ------------------------------------------------------------------------------
 
 const semver = require('semver');
-const eslintPkg = require('eslint/package.json').version;
 const babelEslintVersion = require('babel-eslint/package.json').version;
 const RuleTester = require('../../helpers/ruleTester');
 
@@ -7365,48 +7364,46 @@ ruleTester.run('prop-types', rule, {
       ],
       features: ['flow'],
     },
-    (semver.satisfies(eslintPkg.version, '> 3') ? [
-      {
-        code: `
-          function higherOrderComponent<P: { foo: string }>() {
-            return class extends React.Component<P> {
-              render() {
-                return <div>{this.props.foo} - {this.props.bar}</div>
-              }
+    {
+      code: `
+        function higherOrderComponent<P: { foo: string }>() {
+          return class extends React.Component<P> {
+            render() {
+              return <div>{this.props.foo} - {this.props.bar}</div>
             }
           }
-        `,
-        errors: [
-          {
-            messageId: 'missingPropType',
-            data: { name: 'bar' },
-          },
-        ],
-        features: ['flow'],
-      },
-      {
-        code: `
-          const withOverlayState = <P: {foo: string}>(WrappedComponent: ComponentType<P>): ComponentType<P> => (
-            class extends React.Component<P> {
-              constructor(props) {
-                super(props);
-                this.state = {foo: props.foo, bar: props.bar}
-              }
-              render() {
-                return <div>Hello World</div>
-              }
+        }
+      `,
+      errors: [
+        {
+          messageId: 'missingPropType',
+          data: { name: 'bar' },
+        },
+      ],
+      features: ['flow'],
+    },
+    {
+      code: `
+        const withOverlayState = <P: {foo: string}>(WrappedComponent: ComponentType<P>): ComponentType<P> => (
+          class extends React.Component<P> {
+            constructor(props) {
+              super(props);
+              this.state = {foo: props.foo, bar: props.bar}
             }
-          )
-        `,
-        errors: [
-          {
-            messageId: 'missingPropType',
-            data: { name: 'bar' },
-          },
-        ],
-        features: ['flow'],
-      },
-    ] : []),
+            render() {
+              return <div>Hello World</div>
+            }
+          }
+        )
+      `,
+      errors: [
+        {
+          messageId: 'missingPropType',
+          data: { name: 'bar' },
+        },
+      ],
+      features: ['flow'],
+    },
     {
       code: `
         type PropsA = {foo: string };

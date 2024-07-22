@@ -10,11 +10,8 @@
 // ------------------------------------------------------------------------------
 
 const semver = require('semver');
-const eslintPkg = require('eslint/package.json');
 const babelEslintVersion = require('babel-eslint/package.json').version;
 const RuleTester = require('../../helpers/ruleTester');
-
-require('object.entries/auto'); // for node 6, eslint 5, new TS parser, `function Hello({firstname}: Props): React$Element {` cases
 
 const rule = require('../../../lib/rules/no-unused-prop-types');
 
@@ -5720,21 +5717,19 @@ ruleTester.run('no-unused-prop-types', rule, {
       errors: [{ message: '\'person\' PropType is defined but prop is never used' }],
       features: ['flow'],
     },
-    (semver.satisfies(eslintPkg.version, '> 3') ? [
-      {
-        code: `
-          function higherOrderComponent<P: { foo: string }>() {
-            return class extends React.Component<P> {
-              render() {
-                return <div />;
-              }
+    {
+      code: `
+        function higherOrderComponent<P: { foo: string }>() {
+          return class extends React.Component<P> {
+            render() {
+              return <div />;
             }
           }
-        `,
-        errors: [{ message: '\'foo\' PropType is defined but prop is never used' }],
-        features: ['flow'],
-      },
-    ] : []),
+        }
+      `,
+      errors: [{ message: '\'foo\' PropType is defined but prop is never used' }],
+      features: ['flow'],
+    },
     {
       // issue #1506
       code: `

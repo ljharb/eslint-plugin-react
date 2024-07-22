@@ -9,8 +9,6 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const semver = require('semver');
-const eslintVersion = require('eslint/package.json').version;
 const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/jsx-indent');
 
@@ -1160,7 +1158,7 @@ const Component = () => (
           // JSX
         );
       `,
-      features: ['flow'].concat(semver.satisfies(eslintVersion, '< 8') ? 'no-babel-old' : []),
+      features: ['flow'],
     },
     {
       code: `
@@ -3130,7 +3128,7 @@ const Component = () => (
         },
       ],
     },
-    semver.satisfies(eslintVersion, '> 4') ? {
+    {
       code: `
         import React from 'react';
 
@@ -3163,6 +3161,6 @@ const Component = () => (
         { messageId: 'wrongIndent', line: 6 },
         { messageId: 'wrongIndent', line: 9 },
       ],
-    } : []
+    }
   )),
 });

@@ -9,8 +9,6 @@
 // Requirements
 //------------------------------------------------------------------------------
 
-const semver = require('semver');
-const eslintPkg = require('eslint/package.json');
 const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/jsx-no-leaked-render');
 
@@ -883,11 +881,11 @@ ruleTester.run('jsx-no-leaked-render', rule, {
           return <Something checked={isIndeterminate ? false : isChecked} />
         }
       `,
-      output: semver.satisfies(eslintPkg.version, '> 4') ? `
+      output: `
         const MyComponent = () => {
           return <Something checked={!isIndeterminate && isChecked} />
         }
-      ` : null,
+      `,
       options: [{ validStrategies: ['coerce'] }],
       errors: [{
         message: 'Potential leaked value that might cause unintentionally rendered values or rendering crashes',
@@ -901,11 +899,11 @@ ruleTester.run('jsx-no-leaked-render', rule, {
           return <Something checked={cond && isIndeterminate ? false : isChecked} />
         }
       `,
-      output: semver.satisfies(eslintPkg.version, '> 4') ? `
+      output: `
         const MyComponent = () => {
           return <Something checked={!!cond && !!isIndeterminate ? false : isChecked} />
         }
-      ` : null,
+      `,
       options: [{ validStrategies: ['coerce'] }],
       errors: [{
         message: 'Potential leaked value that might cause unintentionally rendered values or rendering crashes',
@@ -913,7 +911,7 @@ ruleTester.run('jsx-no-leaked-render', rule, {
         column: 38,
       }],
     },
-    semver.satisfies(eslintPkg.version, '> 4') ? {
+    {
       code: `
         const MyComponent = () => {
           return (
@@ -946,8 +944,8 @@ ruleTester.run('jsx-no-leaked-render', rule, {
         line: 5,
         column: 16,
       }],
-    } : [],
-    semver.satisfies(eslintPkg.version, '> 4') ? {
+    },
+    {
       code: `
         const MyComponent = () => {
           return (
@@ -982,7 +980,7 @@ ruleTester.run('jsx-no-leaked-render', rule, {
         line: 5,
         column: 16,
       }],
-    } : [],
+    },
     {
       code: `
         const isOpen = 0;

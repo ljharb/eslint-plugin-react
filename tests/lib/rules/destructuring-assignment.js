@@ -4,8 +4,6 @@
 
 'use strict';
 
-const semver = require('semver');
-const eslintPkg = require('eslint/package.json');
 const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/destructuring-assignment');
 
@@ -827,52 +825,49 @@ ruleTester.run('destructuring-assignment', rule, {
         },
       ],
     },
-    // Ignore for ESLint < 4 because ESLint < 4 does not support array fixer.
-    semver.satisfies(eslintPkg.version, '>= 4') ? [
-      {
-        code: `
-          function Foo(props) {
-            const {a} = props;
-            return <p>{a}</p>;
-          }
-        `,
-        options: ['always', { destructureInSignature: 'always' }],
-        errors: [
-          {
-            messageId: 'destructureInSignature',
-            line: 3,
-          },
-        ],
-        output: `
-          function Foo({a}) {
+    {
+      code: `
+        function Foo(props) {
+          const {a} = props;
+          return <p>{a}</p>;
+        }
+      `,
+      options: ['always', { destructureInSignature: 'always' }],
+      errors: [
+        {
+          messageId: 'destructureInSignature',
+          line: 3,
+        },
+      ],
+      output: `
+        function Foo({a}) {
 ${'            '}
-            return <p>{a}</p>;
-          }
-        `,
-      },
-      {
-        code: `
-          function Foo(props: FooProps) {
-            const {a} = props;
-            return <p>{a}</p>;
-          }
-        `,
-        options: ['always', { destructureInSignature: 'always' }],
-        errors: [
-          {
-            messageId: 'destructureInSignature',
-            line: 3,
-          },
-        ],
-        output: `
-          function Foo({a}: FooProps) {
+          return <p>{a}</p>;
+        }
+      `,
+    },
+    {
+      code: `
+        function Foo(props: FooProps) {
+          const {a} = props;
+          return <p>{a}</p>;
+        }
+      `,
+      options: ['always', { destructureInSignature: 'always' }],
+      errors: [
+        {
+          messageId: 'destructureInSignature',
+          line: 3,
+        },
+      ],
+      output: `
+        function Foo({a}: FooProps) {
 ${'            '}
-            return <p>{a}</p>;
-          }
-        `,
-        features: ['ts', 'no-babel'],
-      },
-    ] : [],
+          return <p>{a}</p>;
+        }
+      `,
+      features: ['ts', 'no-babel'],
+    },
     {
       code: `
         type Props = { text: string };

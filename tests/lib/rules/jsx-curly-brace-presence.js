@@ -11,8 +11,6 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const semver = require('semver');
-const eslintPkg = require('eslint/package.json');
 const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/jsx-curly-brace-presence');
 
@@ -418,27 +416,25 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
     {
       code: `<App>{/* comment */}</App>`,
     },
-    (semver.satisfies(eslintPkg.version, '> 3') ? [
-      {
-        code: `<App>{/* comment */ <Foo />}</App>`,
-      },
-      {
-        code: `<App>{/* comment */ 'foo'}</App>`,
-      },
-      {
-        code: `<App prop={/* comment */ 'foo'} />`,
-      },
-      {
-        code: `
-          <App>
-            {
-              // comment
-              <Foo />
-            }
-          </App>
-        `,
-      },
-    ] : []),
+    {
+      code: `<App>{/* comment */ <Foo />}</App>`,
+    },
+    {
+      code: `<App>{/* comment */ 'foo'}</App>`,
+    },
+    {
+      code: `<App prop={/* comment */ 'foo'} />`,
+    },
+    {
+      code: `
+        <App>
+          {
+            // comment
+            <Foo />
+          }
+        </App>
+      `,
+    },
     {
       code: `<App horror=<div /> />`,
       features: ['no-ts'],
@@ -607,38 +603,6 @@ ruleTester.run('jsx-curly-brace-presence', rule, {
         { messageId: 'unnecessaryCurly', line: 5 },
       ],
     },
-    semver.satisfies(eslintPkg.version, '^7.5.0') ? { // require('@babel/eslint-parser/package.json').peerDependencies.eslint
-      // TODO: figure out how to make all other parsers work this well
-      code: `
-        <MyComponent>
-          {'foo'}
-          <div>
-            {'bar'}
-          </div>
-          {'baz'}
-          {'some-complicated-exp'}
-        </MyComponent>
-      `,
-      options: [{ children: 'never' }],
-      parser: parsers['@BABEL_ESLINT'],
-      parserOptions: parsers.babelParserOptions({}, new Set()),
-      output: `
-        <MyComponent>
-          foo
-          <div>
-            bar
-          </div>
-          baz
-          some-complicated-exp
-        </MyComponent>
-      `,
-      errors: [
-        { messageId: 'unnecessaryCurly', line: 3 },
-        { messageId: 'unnecessaryCurly', line: 5 },
-        { messageId: 'unnecessaryCurly', line: 7 },
-        { messageId: 'unnecessaryCurly', line: 8 },
-      ],
-    } : [],
     {
       code: `<MyComponent prop='bar'>foo</MyComponent>`,
       options: [{ props: 'always' }],

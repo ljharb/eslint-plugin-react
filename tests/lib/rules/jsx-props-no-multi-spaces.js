@@ -9,8 +9,6 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const semver = require('semver');
-const eslintPkg = require('eslint/package.json');
 const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/jsx-props-no-multi-spaces');
 
@@ -100,56 +98,54 @@ ruleTester.run('jsx-props-no-multi-spaces', rule, {
         />
       `,
     },
-    (semver.satisfies(eslintPkg.version, '> 3') ? [
-      {
-        code: `
-          <button
-            title="Some button"
-            // this is a comment
-            onClick={(value) => {
-              console.log(value);
-            }}
-            type="button"
-          />
-        `,
-      },
-      {
-        code: `
-          <button
-            title="Some button"
-            // this is a comment
-            // this is a second comment
-            onClick={(value) => {
-              console.log(value);
-            }}
-            type="button"
-          />
-        `,
-      },
-      {
-        code: `
-          <App
-            foo="Some button" // comment
-            // comment
-            bar=""
-          />
-        `,
-      },
-      {
-        code: `
-          <button
-            title="Some button"
-            /* this is a multiline comment
-                ...
-                ... */
-            onClick={(value) => {
-              console.log(value);
-            }}
-            type="button"
-          />
-        `,
-      },
-    ] : [])
+    {
+      code: `
+        <button
+          title="Some button"
+          // this is a comment
+          onClick={(value) => {
+            console.log(value);
+          }}
+          type="button"
+        />
+      `,
+    },
+    {
+      code: `
+        <button
+          title="Some button"
+          // this is a comment
+          // this is a second comment
+          onClick={(value) => {
+            console.log(value);
+          }}
+          type="button"
+        />
+      `,
+    },
+    {
+      code: `
+        <App
+          foo="Some button" // comment
+          // comment
+          bar=""
+        />
+      `,
+    },
+    {
+      code: `
+        <button
+          title="Some button"
+          /* this is a multiline comment
+              ...
+              ... */
+          onClick={(value) => {
+            console.log(value);
+          }}
+          type="button"
+        />
+      `,
+    }
   )),
 
   invalid: parsers.all([].concat(
@@ -293,78 +289,76 @@ ruleTester.run('jsx-props-no-multi-spaces', rule, {
         },
       ],
     },
-    (semver.satisfies(eslintPkg.version, '> 3') ? [
-      {
-        code: `
-          <button
-            title="Some button"
-            // this is a comment
-            onClick={(value) => {
-              console.log(value);
-            }}
+    {
+      code: `
+        <button
+          title="Some button"
+          // this is a comment
+          onClick={(value) => {
+            console.log(value);
+          }}
 
-            type="button"
-          />
-        `,
-        errors: [
-          {
-            messageId: 'noLineGap',
-            data: { prop1: 'onClick', prop2: 'type' },
-          },
-        ],
-      },
-      {
-        code: `
-          <button
-            title="Some button"
-            // this is a comment
-            // second comment
+          type="button"
+        />
+      `,
+      errors: [
+        {
+          messageId: 'noLineGap',
+          data: { prop1: 'onClick', prop2: 'type' },
+        },
+      ],
+    },
+    {
+      code: `
+        <button
+          title="Some button"
+          // this is a comment
+          // second comment
 
-            onClick={(value) => {
-              console.log(value);
-            }}
+          onClick={(value) => {
+            console.log(value);
+          }}
 
-            type="button"
-          />
-        `,
-        errors: [
-          {
-            messageId: 'noLineGap',
-            data: { prop1: 'title', prop2: 'onClick' },
-          },
-          {
-            messageId: 'noLineGap',
-            data: { prop1: 'onClick', prop2: 'type' },
-          },
-        ],
-      },
-      {
-        code: `
-          <button
-            title="Some button"
-            /*this is a
-              multiline
-              comment
-            */
+          type="button"
+        />
+      `,
+      errors: [
+        {
+          messageId: 'noLineGap',
+          data: { prop1: 'title', prop2: 'onClick' },
+        },
+        {
+          messageId: 'noLineGap',
+          data: { prop1: 'onClick', prop2: 'type' },
+        },
+      ],
+    },
+    {
+      code: `
+        <button
+          title="Some button"
+          /*this is a
+            multiline
+            comment
+          */
 
-            onClick={(value) => {
-              console.log(value);
-            }}
+          onClick={(value) => {
+            console.log(value);
+          }}
 
-            type="button"
-          />
-        `,
-        errors: [
-          {
-            messageId: 'noLineGap',
-            data: { prop1: 'title', prop2: 'onClick' },
-          },
-          {
-            messageId: 'noLineGap',
-            data: { prop1: 'onClick', prop2: 'type' },
-          },
-        ],
-      },
-    ] : [])
+          type="button"
+        />
+      `,
+      errors: [
+        {
+          messageId: 'noLineGap',
+          data: { prop1: 'title', prop2: 'onClick' },
+        },
+        {
+          messageId: 'noLineGap',
+          data: { prop1: 'onClick', prop2: 'type' },
+        },
+      ],
+    }
   )),
 });

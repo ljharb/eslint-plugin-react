@@ -1,10 +1,9 @@
 import eslint from 'eslint';
-import estree from 'estree';
+import { Node } from "estree";
 
 declare global {
-  interface ASTNode extends estree.BaseNode {
-    [_: string]: any; // TODO: fixme
-  }
+  type ASTNode = Node;
+
   type Scope = eslint.Scope.Scope;
   type Token = eslint.AST.Token;
   type Fixer = eslint.Rule.RuleFixer;

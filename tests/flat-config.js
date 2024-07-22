@@ -5,10 +5,6 @@
 const semver = require('semver');
 const eslintPkg = require('eslint/package.json');
 
-if (!semver.satisfies(eslintPkg.version, '>= 8.23.0')) {
-  return;
-}
-
 const ESLint = semver.major(eslintPkg.version) < 9
   ? require('eslint/use-at-your-own-risk').FlatESLint // eslint-disable-line import/no-unresolved -- false positive
   : require('eslint').ESLint;

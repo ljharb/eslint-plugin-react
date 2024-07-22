@@ -9,8 +9,6 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-const semver = require('semver');
-const eslintPkg = require('eslint/package.json');
 const RuleTester = require('../../helpers/ruleTester');
 const rule = require('../../../lib/rules/jsx-sort-props');
 
@@ -287,7 +285,7 @@ ruleTester.run('jsx-sort-props', rule, {
         />
       `,
     },
-    semver.satisfies(process.version, '>= 13') ? {
+    {
       code: `
         <RawFileField
           onFileRemove={asMedia ? null : handleRemove}
@@ -296,7 +294,7 @@ ruleTester.run('jsx-sort-props', rule, {
         />
       `,
       options: [{ locale: 'sk-SK' }],
-    } : []
+    }
   )),
   invalid: parsers.all([].concat(
     {
@@ -822,7 +820,7 @@ ruleTester.run('jsx-sort-props', rule, {
         },
       ],
     },
-    semver.satisfies(eslintPkg.version, '> 3') ? {
+    {
       code: `
         <foo
           m={0}
@@ -871,8 +869,8 @@ ruleTester.run('jsx-sort-props', rule, {
           line: 11,
         },
       ],
-    } : [],
-    semver.satisfies(eslintPkg.version, '> 3') ? {
+    },
+    {
       code: `
         <foo
           m={0}
@@ -925,8 +923,8 @@ ruleTester.run('jsx-sort-props', rule, {
           line: 11,
         },
       ],
-    } : [],
-    semver.satisfies(eslintPkg.version, '> 3') ? {
+    },
+    {
       code: `
         <foo
           a1={0}
@@ -981,8 +979,8 @@ ruleTester.run('jsx-sort-props', rule, {
           line: 12,
         },
       ],
-    } : [],
-    semver.satisfies(eslintPkg.version, '> 3') ? {
+    },
+    {
       code: `
         <foo
           a1={0}
@@ -1029,8 +1027,8 @@ ruleTester.run('jsx-sort-props', rule, {
           line: 12,
         },
       ],
-    } : [],
-    semver.satisfies(eslintPkg.version, '> 3') ? {
+    },
+    {
       code: `
         <foo a={0} b={1} /* comment for b and ab */ ab={1} aa={0} />
       `,
@@ -1047,8 +1045,8 @@ ruleTester.run('jsx-sort-props', rule, {
           line: 2,
         },
       ],
-    } : [],
-    semver.satisfies(eslintPkg.version, '> 3') ? {
+    },
+    {
       code: `
         <ReactJson src={rowResult} name="data" collapsed={4} collapseStringsAfterLength={60} onEdit={onEdit} /* onDelete={onEdit} */ />
       `,
@@ -1073,7 +1071,7 @@ ruleTester.run('jsx-sort-props', rule, {
           line: 2,
         },
       ],
-    } : [],
+    },
     {
       code: `
         <Page
