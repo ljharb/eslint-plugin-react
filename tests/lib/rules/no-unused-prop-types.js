@@ -9,8 +9,6 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const semver = require('semver');
-const babelEslintVersion = require('babel-eslint/package.json').version;
 const RuleTester = require('../../helpers/ruleTester');
 
 const rule = require('../../../lib/rules/no-unused-prop-types');
@@ -3735,7 +3733,7 @@ ruleTester.run('no-unused-prop-types', rule, {
         type StateProps = ReturnType<typeof mapStateToProps>
         type DispatchProps = ReturnType<typeof mapDispatchToProps>
       `,
-      features: semver.satisfies(babelEslintVersion, '> 8') ? ['types'] : ['ts', 'no-babel'],
+      features: ['types'],
     },
     // Issue: #2795
     {
@@ -3764,7 +3762,7 @@ ruleTester.run('no-unused-prop-types', rule, {
         type StateProps = ReturnType<typeof mapStateToProps>
         type DispatchProps = ReturnType<typeof mapDispatchToProps>
       `,
-      features: [semver.satisfies(babelEslintVersion, '> 8') ? 'types' : 'flow'],
+      features: ['types'],
     },
     // Issue: #2795
     {
@@ -3792,7 +3790,7 @@ ruleTester.run('no-unused-prop-types', rule, {
         type StateProps = ReturnType<typeof mapStateToProps>
         type DispatchProps = ReturnType<typeof mapDispatchToProps>
       `,
-      features: [semver.satisfies(babelEslintVersion, '> 8') ? 'types' : 'flow'],
+      features: ['types'],
     },
     {
       code: `
@@ -4522,24 +4520,6 @@ ruleTester.run('no-unused-prop-types', rule, {
       features: ['types'],
       errors: [{ message: '\'unused\' PropType is defined but prop is never used' }],
     },
-    semver.satisfies(babelEslintVersion, '< 9') ? [
-      {
-        code: `
-          class Hello extends React.Component {
-            props: {
-              unused: Object;
-            };
-            render () {
-              return <div>Hello {this.props.firstname}</div>;
-            }
-          }
-        `,
-        features: ['flow'],
-        errors: [
-          { message: '\'unused\' PropType is defined but prop is never used' },
-        ],
-      },
-    ] : [],
     {
       code: `
         type Props = {unused: Object;};

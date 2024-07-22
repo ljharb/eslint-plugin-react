@@ -8,7 +8,6 @@
 // Requirements
 // -----------------------------------------------------------------------------
 
-const babelEslintVersion = require('babel-eslint/package.json').version;
 const semver = require('semver');
 const version = require('eslint/package.json').version;
 const RuleTester = require('../../helpers/ruleTester');
@@ -575,7 +574,7 @@ ruleTester.run('no-typos', rule, {
           }
         }
       `,
-      features: [].concat('class fields', semver.satisfies(babelEslintVersion, '< 9') ? 'no-babel-old' : []),
+      features: ['class fields'],
       parserOptions: Object.assign({}, parserOptions, {
         babelOptions: {
           // classPrivateMethods: true,

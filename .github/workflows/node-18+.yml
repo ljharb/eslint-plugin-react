@@ -29,9 +29,7 @@ jobs:
           - 9
           - 8
         babel-eslint:
-          - 10
-          - 9
-          - 8
+          - ^7.25.1
         typescript-eslint:
           - 8
         # exclude:

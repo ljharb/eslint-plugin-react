@@ -9,8 +9,6 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-const semver = require('semver');
-const babelEslintVersion = require('babel-eslint/package.json').version;
 const RuleTester = require('../../helpers/ruleTester');
 
 const rule = require('../../../lib/rules/prop-types');
@@ -5382,25 +5380,6 @@ ruleTester.run('prop-types', rule, {
         },
       ],
     },
-    semver.satisfies(babelEslintVersion, '< 9') ? {
-      code: `
-        class Hello extends React.Component {
-          static propTypes: {
-            firstname: PropTypes.string
-          };
-          render() {
-            return <div>Hello {this.props.firstname}</div>;
-          }
-        }
-      `,
-      parser: parsers.BABEL_ESLINT,
-      errors: [
-        {
-          messageId: 'missingPropType',
-          data: { name: 'firstname' },
-        },
-      ],
-    } : [],
     {
       code: `
         class Hello extends React.Component {
