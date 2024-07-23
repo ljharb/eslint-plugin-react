@@ -1,9 +1,7 @@
 'use strict';
 
 const semver = require('semver');
-const entries = require('object.entries');
 const { version } = require('eslint/package.json');
-const flatMap = require('array.prototype.flatmap');
 const tsParserVersion = require('@typescript-eslint/parser/package.json').version;
 
 const disableNewTS = semver.satisfies(tsParserVersion, '>= 4.1') // this rule is not useful on v4.1+ of the TS parser
@@ -16,17 +14,16 @@ function minEcmaVersion(features, parserOptions) {
     'optional chaining': 2020,
     'nullish coalescing': 2020,
   };
-  const result = Math.max.apply(
-    Math,
-    [].concat(
+  const result = Math.max(
+    ...[].concat(
       (parserOptions && parserOptions.ecmaVersion) || [],
-      flatMap(entries(minEcmaVersionForFeatures), (entry) => {
+      Object.entries(minEcmaVersionForFeatures).flatMap((entry) => {
         const f = entry[0];
         const y = entry[1];
         return features.has(f) ? y : [];
       }),
-    ).map((y) => (y > 5 && y < 2015 ? y + 2009 : y)), // normalize editions to years
-  );
+    ).map((y) => (y > 5 && y < 2015 ? y + 2009 : y)),
+  ); // normalize editions to years
   return Number.isFinite(result) ? result : undefined;
 }
 
@@ -63,7 +60,7 @@ const parsers = {
     };
   },
   all: function all(tests) {
-    const t = flatMap(tests, (test) => {
+    const t = tests.flatMap((test) => {
       if (typeof test === 'string') {
         test = { code: test };
       }
