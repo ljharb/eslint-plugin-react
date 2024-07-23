@@ -37,11 +37,6 @@
     "no-plusplus": [2, {"allowForLoopAfterthoughts": true}],
     "no-param-reassign": 1,
     "strict": [2, "safe"],
-    "valid-jsdoc": [2, {
-      "requireReturn": false,
-      "requireParamDescription": false,
-      "requireReturnDescription": false,
-    }],
 
     "eslint-plugin/consistent-output": 0,
     "eslint-plugin/require-meta-docs-description": [2, { "pattern": "^(Enforce|Require|Disallow)" }],
