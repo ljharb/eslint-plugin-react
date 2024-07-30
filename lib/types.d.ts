@@ -1,27 +1,33 @@
-import eslint from 'eslint';
-import type { Node } from "estree";
-import type { TSESTree } from "@typescript-eslint/typescript-estree";
+import eslint, { type Rule } from 'eslint';
+import type { Node, SpreadElement } from 'estree';
+import type ESTree from 'estree';
+import type { TSESTree } from '@typescript-eslint/typescript-estree';
 
 declare global {
-  type ASTNode = Node | TSESTree.Node;
-
   type Scope = eslint.Scope.Scope;
   type Token = eslint.AST.Token;
   type Fixer = eslint.Rule.RuleFixer;
-  type ArrowFunctionExpression = TSESTree.ArrowFunctionExpression;
-  type CallExpression = TSESTree.CallExpression;
-  type CallExpressionArgument = TSESTree.CallExpression['arguments'][0];
-  type ClassDeclaration = TSESTree.ClassDeclaration;
-  type ClassExpression = TSESTree.ClassExpression;
-  type FunctionDeclaration = TSESTree.FunctionDeclaration;
-  type FunctionExpression = TSESTree.FunctionExpression;
+
+  type ArrowFunctionExpression = ESTree.ArrowFunctionExpression | TSESTree.ArrowFunctionExpression;
+  type CallExpression = ESTree.CallExpression | TSESTree.CallExpression;
+  type CallExpressionArgument = ESTree.CallExpression['arguments'][number] | TSESTree.CallExpressionArgument;
+  type ClassDeclaration = ESTree.ClassDeclaration | TSESTree.ClassDeclaration;
+  type ClassElement = TSESTree.ClassElement;
+  type ClassExpression = ESTree.ClassExpression | TSESTree.ClassExpression;
+  type EntityName = TSESTree.EntityName;
+  type ExportNamedDeclaration = TSESTree.ExportNamedDeclaration;
   type Expression = TSESTree.Expression;
   type ExpressionStatement = TSESTree.ExpressionStatement;
+  type FunctionDeclaration = TSESTree.FunctionDeclaration;
+  type FunctionExpression = TSESTree.FunctionExpression;
+  type Identifier = TSESTree.Identifier;
   type ImportDeclaration = TSESTree.ImportDeclaration;
   type ImportDefaultSpecifier = TSESTree.ImportDefaultSpecifier;
   type ImportSpecifier = TSESTree.ImportSpecifier;
   type JSXAttribute = TSESTree.JSXAttribute;
   type JSXChild = TSESTree.JSXChild;
+  type JSXClosingElement = TSESTree.JSXClosingElement;
+  type JSXClosingFragment = TSESTree.JSXClosingFragment;
   type JSXElement = TSESTree.JSXElement;
   type JSXExpressionContainer = TSESTree.JSXExpressionContainer;
   type JSXFragment = TSESTree.JSXFragment;
@@ -30,41 +36,66 @@ declare global {
   type JSXOpeningFragment = TSESTree.JSXOpeningFragment;
   type JSXSpreadAttribute = TSESTree.JSXSpreadAttribute;
   type JSXText = TSESTree.JSXText;
-  type Literal = TSESTree.Literal;
-  type MemberExpression = TSESTree.MemberExpression;
-  type MethodDefinition = TSESTree.MethodDefinition;
-  type ObjectExpression = TSESTree.ObjectExpression;
-  type ObjectPattern = TSESTree.ObjectPattern;
-  type Property = TSESTree.Property;
-  type ReturnStatement = TSESTree.ReturnStatement;
-  type ThisExpression = TSESTree.ThisExpression;
-  type TSInterfaceDeclaration = TSESTree.TSInterfaceDeclaration;
-  type TSTypeAliasDeclaration = TSESTree.TSTypeAliasDeclaration;
-  type VariableDeclarator = TSESTree.VariableDeclarator;
-  type PropertyDefinitionNode = TSESTree.PropertyDefinition;
-  type JSXClosingElement = TSESTree.JSXClosingElement;
-  type JSXClosingFragment = TSESTree.JSXClosingFragment;
-  type ClassElement = TSESTree.ClassElement;
-  type ObjectLiteralElement = TSESTree.ObjectLiteralElement;
+  type Literal = ESTree.Literal | TSESTree.Literal;
+  type MemberExpression = ESTree.MemberExpression | TSESTree.MemberExpression;
   type MemberExpressionComputedName = TSESTree.MemberExpressionComputedName;
   type MemberExpressionNonComputedName = TSESTree.MemberExpressionNonComputedName;
-  type TSTypeReference = TSESTree.TSTypeReference;
+  type MethodDefinition = TSESTree.MethodDefinition;
+  type ObjectExpression = TSESTree.ObjectExpression;
+  type ObjectLiteralElement = TSESTree.ObjectLiteralElement;
+  type ObjectPattern = ESTree.ObjectPattern | TSESTree.ObjectPattern;
+  type OptionalMemberExpression = MemberExpression & { optional: true };
+  type Parameter = TSESTree.Parameter;
+  type Pattern = ESTree.Pattern;
+  type Property = TSESTree.Property;
+  type PropertyDefinitionNode = TSESTree.PropertyDefinition;
+  type RestElement = TSESTree.RestElement;
+  type ReturnStatement = TSESTree.ReturnStatement;
+  type Statement = TSESTree.Statement;
+  type ThisExpression = TSESTree.ThisExpression;
+  type TSAsExpression = TSESTree.TSAsExpression;
+  type TSInterfaceDeclaration = TSESTree.TSInterfaceDeclaration;
+  type TSInterfaceHeritage = TSESTree.TSInterfaceHeritage;
+  type TSIntersectionType = TSESTree.TSIntersectionType;
+  type TSQualifiedName = TSESTree.TSQualifiedName;
+  type TSTypeAliasDeclaration = TSESTree.TSTypeAliasDeclaration;
   type TSTypeAnnotation = TSESTree.TSTypeAnnotation;
   type TSTypeLiteral = TSESTree.TSTypeLiteral;
-  type TSIntersectionType = TSESTree.TSIntersectionType;
-  type TSInterfaceHeritage = TSESTree.TSInterfaceHeritage;
-  type ExportNamedDeclaration = TSESTree.ExportNamedDeclaration;
+  type TSTypeReference = TSESTree.TSTypeReference;
   type VariableDeclaration = TSESTree.VariableDeclaration;
-  type TSAsExpression = TSESTree.TSAsExpression;
-  type EntityName = TSESTree.EntityName;
-  type Parameter = TSESTree.Parameter;
-  type Statement = TSESTree.Statement;
-  type Identifier = TSESTree.Identifier;
-  type RestElement = TSESTree.RestElement;
-  type ImportBinding = unknown; // TODO
-  type ClassProperty = ASTNode; // TODO
-  type TypeAlias = unknown; // TODO
-  type TSQualifiedName = TSESTree.TSQualifiedName;
+  type VariableDeclarator = TSESTree.VariableDeclarator;
+
+  type GenericFlowNode = {
+    type: string;
+    types: GenericFlowNode[];
+    typeAnnotation: GenericFlowNode;
+    right?: ASTNode;
+  };
+
+  type GenericTypeAnnotation = GenericFlowNode; // TODO
+  type ImportBinding = GenericFlowNode; // TODO
+  type ClassProperty =  Omit<ClassElement, 'type'> & {
+    type: 'ClassProperty';
+  }; // TODO
+  type TypeAlias = GenericFlowNode & { id: Identifier, right: ASTNode }; // TODO
+  interface ExperimentalSpreadProperty extends Omit<SpreadElement, 'type'> {
+    type: 'ExperimentalSpreadProperty'
+  }
+  type ObjectTypeAnnotation = GenericFlowNode; // TODO
+  type BooleanTypeAnnotation = GenericFlowNode; // TODO
+  type ObjectTypeProperty = GenericFlowNode & {
+    value: BooleanTypeAnnotation
+  }; // TODO
+
+  type BabelTypes =
+    | ImportBinding
+    | ClassProperty
+    | TypeAlias
+    | ExperimentalSpreadProperty
+    | ObjectTypeAnnotation
+    | GenericTypeAnnotation
+    | ObjectTypeProperty
+    | BooleanTypeAnnotation;
 
   type JSX =
     | TSESTree.JSXAttribute
@@ -87,6 +118,10 @@ declare global {
     | TSESTree.JSXTagNameExpression
     | JSXText
     | TSESTree.JSXTextToken;
+
+  type NodeParentExtension = eslint.Rule.NodeParentExtension;
+
+  type ASTNode = (TSESTree.Node | Node | eslint.AST.Token | BabelTypes) & { parent?: ASTNode };
 
   type Context = eslint.Rule.RuleContext;
 
