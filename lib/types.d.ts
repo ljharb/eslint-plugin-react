@@ -9,18 +9,20 @@ declare global {
   type Fixer = eslint.Rule.RuleFixer;
 
   type ArrowFunctionExpression = ESTree.ArrowFunctionExpression | TSESTree.ArrowFunctionExpression;
+  type AssignmentProperty = ESTree.AssignmentProperty;
   type CallExpression = ESTree.CallExpression | TSESTree.CallExpression;
   type CallExpressionArgument = ESTree.CallExpression['arguments'][number] | TSESTree.CallExpressionArgument;
   type ClassDeclaration = ESTree.ClassDeclaration | TSESTree.ClassDeclaration;
   type ClassElement = TSESTree.ClassElement;
   type ClassExpression = ESTree.ClassExpression | TSESTree.ClassExpression;
+  type ConditionalExpression = ESTree.ConditionalExpression | TSESTree.ConditionalExpression;
   type EntityName = TSESTree.EntityName;
   type ExportNamedDeclaration = TSESTree.ExportNamedDeclaration;
-  type Expression = TSESTree.Expression;
+  type Expression = ESTree.Expression | TSESTree.Expression;
   type ExpressionStatement = TSESTree.ExpressionStatement;
   type FunctionDeclaration = TSESTree.FunctionDeclaration;
   type FunctionExpression = TSESTree.FunctionExpression;
-  type Identifier = TSESTree.Identifier;
+  type Identifier = ESTree.Identifier | TSESTree.Identifier;
   type ImportDeclaration = TSESTree.ImportDeclaration;
   type ImportDefaultSpecifier = TSESTree.ImportDefaultSpecifier;
   type ImportSpecifier = TSESTree.ImportSpecifier;
@@ -30,6 +32,7 @@ declare global {
   type JSXClosingFragment = TSESTree.JSXClosingFragment;
   type JSXElement = TSESTree.JSXElement;
   type JSXExpressionContainer = TSESTree.JSXExpressionContainer;
+  type JSXEmptyExpression = TSESTree.JSXEmptyExpression;
   type JSXFragment = TSESTree.JSXFragment;
   type JSXIdentifier = TSESTree.JSXIdentifier;
   type JSXOpeningElement = TSESTree.JSXOpeningElement;
@@ -37,6 +40,7 @@ declare global {
   type JSXSpreadAttribute = TSESTree.JSXSpreadAttribute;
   type JSXText = TSESTree.JSXText;
   type Literal = ESTree.Literal | TSESTree.Literal;
+  type LogicalExpression = ESTree.LogicalExpression | TSESTree.LogicalExpression;
   type MemberExpression = ESTree.MemberExpression | TSESTree.MemberExpression;
   type MemberExpressionComputedName = TSESTree.MemberExpressionComputedName;
   type MemberExpressionNonComputedName = TSESTree.MemberExpressionNonComputedName;
@@ -44,13 +48,16 @@ declare global {
   type ObjectExpression = TSESTree.ObjectExpression;
   type ObjectLiteralElement = TSESTree.ObjectLiteralElement;
   type ObjectPattern = ESTree.ObjectPattern | TSESTree.ObjectPattern;
+  type OptionalCallExpression = ESTree.CallExpression & { optional: true };
   type OptionalMemberExpression = MemberExpression & { optional: true };
   type Parameter = TSESTree.Parameter;
   type Pattern = ESTree.Pattern;
+  type PrivateIdentifier = TSESTree.PrivateIdentifier;
   type Property = TSESTree.Property;
   type PropertyDefinitionNode = TSESTree.PropertyDefinition;
   type RestElement = TSESTree.RestElement;
   type ReturnStatement = TSESTree.ReturnStatement;
+  type SpreadElement = ESTree.SpreadElement | TSESTree.SpreadElement;
   type Statement = TSESTree.Statement;
   type TemplateLiteral = ESTree.TemplateLiteral | TSESTree.TemplateLiteral;
   type ThisExpression = TSESTree.ThisExpression;
@@ -65,6 +72,7 @@ declare global {
   type TSTypeReference = TSESTree.TSTypeReference;
   type VariableDeclaration = TSESTree.VariableDeclaration;
   type VariableDeclarator = TSESTree.VariableDeclarator;
+  type Super = ESTree.Super | TSESTree.Super;
 
   type GenericFlowNode = {
     type: string;
@@ -106,6 +114,7 @@ declare global {
     | TSESTree.JSXElement
     | TSESTree.JSXEmptyExpression
     | TSESTree.JSXExpression
+    | TSESTree.JSXEmptyExpression
     | TSESTree.JSXExpressionContainer
     | TSESTree.JSXFragment
     | TSESTree.JSXIdentifier

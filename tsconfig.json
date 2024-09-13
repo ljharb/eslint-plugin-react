@@ -3,6 +3,7 @@
   "compilerOptions": {
     "target": "es2022",
     "module": "commonjs",
+    "maxNodeModuleJsDepth": 0, // todo: remove
   },
   "include": [
     "lib",
