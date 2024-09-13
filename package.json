@@ -62,8 +62,9 @@
     "@babel/plugin-syntax-do-expressions": "^7.25.9",
     "@babel/plugin-syntax-function-bind": "^7.25.9",
     "@babel/preset-react": "^7.26.3",
+    "@ljharb/tsconfig": "^0.3.2",
     "@types/eslint": "^8.56.11 || ^9",
-    "@types/node": "^18.19.41 || ^20 || >= 22",
+    "@types/node": "^18.19.50",
     "@typescript-eslint/parser": "^8.5",
     "babel-eslint": "^8 || ^9 || ^10.1.0",
     "eslint": "^8.23 || ^9.7",
@@ -84,7 +85,7 @@
     "mocha": "^5.2.0",
     "npmignore": "^0.3.1",
     "sinon": "^7.5.0",
-    "typescript": "^3.9.9",
+    "typescript": "^5.7.0-dev.20240912",
     "typescript-eslint-parser": "^20.1.1"
   },
   "peerDependencies": {

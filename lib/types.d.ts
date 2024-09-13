@@ -1,8 +1,9 @@
 import eslint from 'eslint';
-import { Node } from "estree";
+import type { Node } from "estree";
+import type { TSESTree } from "@typescript-eslint/typescript-estree";
 
 declare global {
-  type ASTNode = Node;
+  type ASTNode = Node | TSESTree.Node;
 
   type Scope = eslint.Scope.Scope;
   type Token = eslint.AST.Token;
