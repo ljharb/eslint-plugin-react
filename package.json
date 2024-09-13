@@ -61,6 +61,7 @@
     "@ljharb/tsconfig": "^0.3.2",
     "@types/eslint": "^8.56.11 || ^9",
     "@types/espree": "^10.1.0",
+    "@types/estraverse": "^5.1.7",
     "@types/node": "^18.19.50",
     "@typescript-eslint/parser": "^8.5",
     "eslint": "^8.23 || ^9.7",

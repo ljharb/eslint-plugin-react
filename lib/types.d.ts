@@ -52,6 +52,7 @@ declare global {
   type RestElement = TSESTree.RestElement;
   type ReturnStatement = TSESTree.ReturnStatement;
   type Statement = TSESTree.Statement;
+  type TemplateLiteral = ESTree.TemplateLiteral | TSESTree.TemplateLiteral;
   type ThisExpression = TSESTree.ThisExpression;
   type TSAsExpression = TSESTree.TSAsExpression;
   type TSInterfaceDeclaration = TSESTree.TSInterfaceDeclaration;
