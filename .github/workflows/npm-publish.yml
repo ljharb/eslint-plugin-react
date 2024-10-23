@@ -24,7 +24,7 @@ jobs:
 
       - name: Check package version
         id: cpv
-        uses: ljharb/actions/node/check-package-version@main
+        uses: ljharb/actions/node/check-package-version@tmp
 
       - name: Validate package version
         uses: actions/github-script@v7
@@ -110,7 +110,7 @@ jobs:
         with:
           ref: ${{ github.event.inputs.tag }}
 
-      - uses: ljharb/actions/node/install@main
+      - uses: ljharb/actions/node/install@tmp
         name: "nvm install lts/* && npm install"
         with:
           node-version: "lts/*"

@@ -9,7 +9,7 @@ jobs:
       latest: ${{ steps.set-matrix.outputs.requireds }}
       minors: ${{ steps.set-matrix.outputs.optionals }}
     steps:
-      - uses: ljharb/actions/node/matrix@main
+      - uses: ljharb/actions/node/matrix@tmp
         id: set-matrix
         with:
           versionsAsRoot: true
@@ -99,7 +99,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: ljharb/actions/node/install@main
+      - uses: ljharb/actions/node/install@tmp
         name: 'nvm install ${{ matrix.node-version }} && npm install'
         with:
           node-version: ${{ matrix.node-version }}

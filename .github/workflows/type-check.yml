@@ -35,7 +35,7 @@ jobs:
           persist-credentials: false
           show-progress: false
 
-      - uses: ljharb/actions/node/install@main
+      - uses: ljharb/actions/node/install@tmp
         name: 'nvm install lts/* && npm install'
         with:
           node-version: 'lts/*'
