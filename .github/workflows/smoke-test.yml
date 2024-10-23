@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ljharb/actions/node/install@main
+      - uses: ljharb/actions/node/install@tmp
         name: 'nvm install lts/* && npm install'
         with:
           node-version: 'lts/*'

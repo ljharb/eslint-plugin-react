@@ -4,6 +4,6 @@ on: [pull_request_target]
 
 jobs:
   _:
-    uses: ljharb/actions/.github/workflows/rebase.yml@main
+    uses: ljharb/actions/.github/workflows/rebase.yml@tmp
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}

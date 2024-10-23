@@ -28,7 +28,7 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - uses: ljharb/actions/node/install@main
+      - uses: ljharb/actions/node/install@tmp
         with:
           node-version: node
           skip-install: true
